@@ -1,10 +1,9 @@
 import * as React from "react";
 import axios from "axios";
-import {
-  withHistoryStoreContext,
-  HistoryStoreComponentProps,
-  HistoryStore
-} from "components/HistoryStoreContext";
+import HistoryStore, {
+  withHistoryStore,
+  HistoryStoreComponentProps
+} from "components/HistoryStore";
 import UserList from "components/UserList";
 import { UserData } from "types/user";
 
@@ -15,11 +14,10 @@ interface ListState {
 }
 
 class List extends React.Component<ListProps, ListState> {
-  public locationKey = this.props.history.location.key;
   constructor(props: ListProps) {
     super(props);
     this.state = {
-      dataSource: this.props.historyStore.storeData.dataSource
+      dataSource: props.dataSource
     };
   }
   public componentDidMount() {
@@ -29,10 +27,10 @@ class List extends React.Component<ListProps, ListState> {
   }
   public render() {
     const { dataSource } = this.state;
-    const { historyStore } = this.props;
+    const { locationKey } = this.props;
     if (!dataSource) return null;
     return (
-      <HistoryStore historyStore={historyStore} dataSource={dataSource}>
+      <HistoryStore locationKey={locationKey} dataSource={dataSource}>
         <UserList datas={dataSource} />
       </HistoryStore>
     );
@@ -47,4 +45,4 @@ class List extends React.Component<ListProps, ListState> {
   };
 }
 
-export default withHistoryStoreContext(List);
+export default withHistoryStore(List);

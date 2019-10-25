@@ -1,11 +1,10 @@
 import axios from "axios";
 import React from "react";
 import queryString from "query-string";
-import {
-  withHistoryStoreContext,
-  HistoryStoreComponentProps,
-  HistoryStore
-} from "components/HistoryStoreContext";
+import HistoryStore, {
+  withHistoryStore,
+  HistoryStoreComponentProps
+} from "components/HistoryStore";
 import UserView from "components/UserView";
 import { UserData } from "types/user";
 
@@ -20,7 +19,7 @@ class View extends React.Component<ViewProps, ViewState> {
   constructor(props: ViewProps) {
     super(props);
     this.state = {
-      dataSource: this.props.historyStore.storeData.dataSource
+      dataSource: props.dataSource
     };
   }
   public componentDidMount() {
@@ -31,9 +30,9 @@ class View extends React.Component<ViewProps, ViewState> {
   public render() {
     const { dataSource } = this.state;
     if (!dataSource) return null;
-    const { historyStore } = this.props;
+    const { locationKey } = this.props;
     return (
-      <HistoryStore historyStore={historyStore} dataSource={dataSource}>
+      <HistoryStore locationKey={locationKey} dataSource={dataSource}>
         <UserView data={dataSource} />
         <button type="button" onClick={this.handlePrev}>
           이전
@@ -55,4 +54,4 @@ class View extends React.Component<ViewProps, ViewState> {
   };
 }
 
-export default withHistoryStoreContext(View);
+export default withHistoryStore(View);
