@@ -1,44 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# react 라우터 변경 시 데이터 유지
 
-## Available Scripts
+## 요구 사항
 
-In the project directory, you can run:
+1. SPA로 작업을 하다가 history back 했을 때 동일한 데이터 및 스크롤 위치가 이동되어야 한다는 이슈.
+2. 브라우저 새로 고침 후에도 데이터 유지 및 history back 했을 때 데이터 유지
 
-### `yarn start`
+## 테스트 1(캐시)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+처음에는 <a href="https://github.com/chayeoi/axios-api-cache-demo" target="_blank">axios-api-cache-demo</a>와 동일하게 테스트를 진행했으나,
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+데이터를 받아와서 setState로 변경된 최종 데이터를 가지고 있어야 했으므로, 적절하지 않다고 판단.
 
-### `yarn test`
+## 테스트 2(Context API 활용)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Context Api를 활용하여 데이터를 저장해서 가지고 오는 방식을 택했으나, 요구 사항 2번째로 인하여 브라우저 새로 고침 시 객체에 저장된 내용이 사라지므로 이 부분도 적절하지 않다고 판단.
 
-### `yarn build`
+## 테스트 3 (sessionStorage)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+테스트 결과 잘 작동함.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+여기서 프로젝트 적용 시에는 401이나 logout 시 axios.interceptors에서 저장한 데이터는 삭제.
