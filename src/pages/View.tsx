@@ -5,7 +5,7 @@ import HistoryStore, {
   withHistoryStore,
   HistoryStoreComponentProps
 } from "components/HistoryStore";
-import UserView from "components/UserView";
+import { UserView } from "components/User";
 import { UserData } from "types/user";
 
 interface ViewProps extends HistoryStoreComponentProps {}

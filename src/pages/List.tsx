@@ -4,7 +4,7 @@ import HistoryStore, {
   withHistoryStore,
   HistoryStoreComponentProps
 } from "components/HistoryStore";
-import UserList from "components/UserList";
+import { UserList } from "components/User";
 import { UserData } from "types/user";
 
 interface ListProps extends HistoryStoreComponentProps {}

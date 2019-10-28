@@ -1,23 +1,23 @@
 import * as React from "react";
-import UserItem from "./UserItem";
+import Item from "./Item";
 import { UserData } from "types/user";
 
-interface UserListProps {
+interface ListProps {
   datas?: UserData[];
 }
 
-class UserList extends React.Component<UserListProps> {
+class List extends React.Component<ListProps> {
   public render() {
     const { datas } = this.props;
     if (!datas) return null;
     return (
       <ul>
         {datas.map(v => {
-          return <UserItem data={v} key={v.id} />;
+          return <Item data={v} key={v.id} />;
         })}
       </ul>
     );
   }
 }
 
-export default UserList;
+export default List;

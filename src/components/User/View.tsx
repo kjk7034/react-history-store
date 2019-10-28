@@ -1,11 +1,11 @@
 import * as React from "react";
 import { UserData } from "types/user";
 
-interface UserViewProps {
+interface ViewProps {
   data: UserData;
 }
 
-class UserView extends React.Component<UserViewProps> {
+class View extends React.Component<ViewProps> {
   public render() {
     const { id, avatar, name, createdAt } = this.props.data;
     return (
@@ -20,4 +20,4 @@ class UserView extends React.Component<UserViewProps> {
   }
 }
 
-export default UserView;
+export default View;

@@ -2,11 +2,11 @@ import * as React from "react";
 import { UserData } from "types/user";
 import { Link } from "react-router-dom";
 
-interface UserItemProps {
+interface ItemProps {
   data: UserData;
 }
 
-class UserItem extends React.Component<UserItemProps> {
+class Item extends React.Component<ItemProps> {
   public render() {
     const { id, avatar, name } = this.props.data;
     return (
@@ -20,4 +20,4 @@ class UserItem extends React.Component<UserItemProps> {
   }
 }
 
-export default UserItem;
+export default Item;
